@@ -1,0 +1,7 @@
+tests:
+  # section.subsection
+  numerical.integration.ztest:
+    # build_only: true
+    platform_allow:
+      - qemu_cortex_m3
+    tags: test_framework
