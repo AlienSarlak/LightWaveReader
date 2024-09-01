@@ -43,7 +43,7 @@ float callback(Methods m, float arr[], int n, float a, float b)
 	return result;
 }
 
-float small_array(Methods m)
+void small_array(Methods m)
 {
 	float arr[] = {1.0, 2.0, 3.0, 4.0, 5.0};
 	int n = sizeof(arr) / sizeof(arr[0]) - 1;
@@ -52,14 +52,10 @@ float small_array(Methods m)
 	float expected = 12.0;
 	float result = callback(m, arr, n, a, b);
 
-	int int_value = (int)(expected * 1000);
-	printf("Expected Value: %d.%02d\n", int_value / 1000, int_value % 1000);
-	int_value = (int)(result * 1000);
-	printf("Result Value: %d.%02d\n", int_value / 1000, int_value % 1000);
 	zassert_true(fabs(result - expected) < 1e-6, "Test failed: expected is not equal to the result");
 }
 
-float exp_function(Methods m)
+void exp_function(Methods m)
 {
 	float a = 0.0F;
 	float b = 2.0F;
@@ -76,10 +72,11 @@ float exp_function(Methods m)
 
 	float expected = expf(b) - expf(a);
 	float result = callback(m, arr, n, a, b);
+
 	zassert_true(fabs(result - expected) < 5e-2, "Test failed: expected is not equal to the result");
 }
 
-float sin_function(Methods m)
+void sin_function(Methods m)
 {
 	float a = 0.0F;
 	float b = M_PI_4;
@@ -96,10 +93,11 @@ float sin_function(Methods m)
 
 	float expected = -cosf(b) + cosf(a);
 	float result = callback(m, arr, n, a, b);
+
 	zassert_true(fabs(result - expected) < 5e-2, "Test failed: expected is not equal to the result");
 }
 
-float quadratic_function(Methods m)
+void quadratic_function(Methods m)
 {
 	/*
 	x=x^2 + 5x + 9
@@ -165,24 +163,24 @@ ZTEST(midpoint_tests, test_quadratic_function)
 /*					TRAPIZOIDALal					*/
 /* */
 
-ZTEST_SUITE(TRAPIZOIDALal_tests, NULL, NULL, NULL, NULL, NULL);
+ZTEST_SUITE(trapezoidal_test, NULL, NULL, NULL, NULL, NULL);
 
-ZTEST(TRAPIZOIDALal_tests, test_small_array)
+ZTEST(trapezoidal_test, test_small_array)
 {
 	small_array(TRAPEZOIDAL);
 }
 
-ZTEST(TRAPIZOIDALal_tests, test_exp_function)
+ZTEST(trapezoidal_test, test_exp_function)
 {
 	exp_function(TRAPEZOIDAL);
 }
 
-ZTEST(TRAPIZOIDALal_tests, test_sin_function)
+ZTEST(trapezoidal_test, test_sin_function)
 {
 	sin_function(TRAPEZOIDAL);
 }
 
-ZTEST(TRAPIZOIDALal_tests, test_quadratic_function)
+ZTEST(trapezoidal_test, test_quadratic_function)
 {
 	quadratic_function(TRAPEZOIDAL);
 }
@@ -191,24 +189,24 @@ ZTEST(TRAPIZOIDALal_tests, test_quadratic_function)
 /*					  Simpson					*/
 /* */
 
-ZTEST_SUITE(simpson_tests, NULL, NULL, NULL, NULL, NULL);
+ZTEST_SUITE(simpsons_tests, NULL, NULL, NULL, NULL, NULL);
 
-ZTEST(simpson_tests, test_small_array)
+ZTEST(simpsons_tests, test_small_array)
 {
 	small_array(SIMPSONS);
 }
 
-ZTEST(simpson_tests, test_exp_function)
+ZTEST(simpsons_tests, test_exp_function)
 {
 	exp_function(SIMPSONS);
 }
 
-ZTEST(simpson_tests, test_sin_function)
+ZTEST(simpsons_tests, test_sin_function)
 {
 	sin_function(SIMPSONS);
 }
 
-ZTEST(simpson_tests, test_quadratic_function)
+ZTEST(simpsons_tests, test_quadratic_function)
 {
 	quadratic_function(SIMPSONS);
 }

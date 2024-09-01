@@ -8,11 +8,9 @@ float trapezoidal(float arr[], int n, float a, float b)
     float sum = arr[0] + arr[n];
 
     for (int i = 1; i < n; i++)
-    {
-        sum += 2 * arr[i];
-    }
+        sum += 2.0F * arr[i];
 
-    return (h / 2) * sum;
+    return (h / 2.0F) * sum;
 }
 
 // Function to implement Midpoint Rule
